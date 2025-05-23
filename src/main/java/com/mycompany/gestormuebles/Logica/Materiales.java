@@ -4,18 +4,32 @@
  */
 package com.mycompany.gestormuebles.Logica;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 /**
  *
  * @author Jseba
  */
-public class Materiales {
+
+@Entity
+public class Materiales implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int idMaterial;
     private String nombreMaterial;
     private String tipoMaterial;
     private int cantidadMaterial;
     
+    @ManyToOne
+    @JoinColumn(name = "id_Proveedor")
     private Proveedor materialProveedor;
-
+    
     public Materiales() {
     }
 

@@ -23,12 +23,14 @@ com\mycompany\gestormuebles\Logica\Proyecto.class
 com\mycompany\gestormuebles\Igu\MenuPrincipal$2.class
 com\mycompany\gestormuebles\Igu\RegistroMaterial1$4.class
 com\mycompany\gestormuebles\Igu\RegistroProveedor1$10.class
+com\mycompany\gestormuebles\Persistencia\MaterialesJpaController.class
 com\mycompany\gestormuebles\Igu\RegistroProveedor1$9.class
 com\mycompany\gestormuebles\Persistencia\exceptions\IllegalOrphanException.class
 com\mycompany\gestormuebles\Igu\RegistroProveedor1$17.class
 com\mycompany\gestormuebles\Igu\RegistroProveedor1$12.class
 com\mycompany\gestormuebles\Igu\RegistroProveedor1$15.class
 com\mycompany\gestormuebles\GestorMuebles.class
+com\mycompany\gestormuebles\Igu\MenuPrincipal$4.class
 com\mycompany\gestormuebles\Igu\RegistroMaterial1$2.class
 com\mycompany\gestormuebles\Igu\MenuPrincipal.class
 com\mycompany\gestormuebles\Igu\RegistroProveedor1$4.class

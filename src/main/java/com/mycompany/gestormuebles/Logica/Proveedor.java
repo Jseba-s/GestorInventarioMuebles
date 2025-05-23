@@ -5,10 +5,12 @@
 package com.mycompany.gestormuebles.Logica;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -26,11 +28,13 @@ public class Proveedor implements Serializable {
     private String correoProveedor;
     private String direccion;
     private String estado;
-
+    
+    @OneToMany(mappedBy = "materialProveedor")
+    private List<Materiales> materialesProveedor; 
     public Proveedor() {
     }
 
-    public Proveedor(int idProveedor, String nombreProveedor, String contactoProveedor, String telefonoProveedor, String correoProveedor, String direccion, String estado) {
+    public Proveedor(int idProveedor, String nombreProveedor, String contactoProveedor, String telefonoProveedor, String correoProveedor, String direccion, String estado, List<Materiales> materialesProveedor) {
         this.idProveedor = idProveedor;
         this.nombreProveedor = nombreProveedor;
         this.contactoProveedor = contactoProveedor;
@@ -38,7 +42,10 @@ public class Proveedor implements Serializable {
         this.correoProveedor = correoProveedor;
         this.direccion = direccion;
         this.estado = estado;
+        this.materialesProveedor = materialesProveedor;
     }
+
+    
 
     public int getIdProveedor() {
         return idProveedor;
@@ -94,6 +101,14 @@ public class Proveedor implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public List<Materiales> getMaterialesProveedor() {
+        return materialesProveedor;
+    }
+
+    public void setMaterialesProveedor(List<Materiales> materialesProveedor) {
+        this.materialesProveedor = materialesProveedor;
     }
     
     

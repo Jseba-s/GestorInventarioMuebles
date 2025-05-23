@@ -1,83 +1,143 @@
 package com.mycompany.gestormuebles.Persistencia;
 
+import com.mycompany.gestormuebles.Logica.Materiales;
 import com.mycompany.gestormuebles.Logica.Proveedor;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 public class ProveedorJpaController implements Serializable {
 
-    private EntityManagerFactory emf;
-
-    // Constructor que recibe el EntityManagerFactory desde fuera
     public ProveedorJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
-    // Método para obtener el EntityManager
+    private EntityManagerFactory emf = null;
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-
     
     public ProveedorJpaController(){
         emf = Persistence.createEntityManagerFactory("GestorMueblesPU");
     }
-    // Crear un nuevo proveedor
+
     public void create(Proveedor proveedor) {
-        EntityManager em = getEntityManager();
+        if (proveedor.getMaterialesProveedor() == null) {
+            proveedor.setMaterialesProveedor(new ArrayList<>());
+        }
+        EntityManager em = null;
         try {
+            em = getEntityManager();
             em.getTransaction().begin();
+            List<Materiales> attachedMateriales = new ArrayList<>();
+            for (Materiales materiales : proveedor.getMaterialesProveedor()) {
+                materiales = em.getReference(materiales.getClass(), materiales.getIdMaterial());
+                attachedMateriales.add(materiales);
+            }
+            proveedor.setMaterialesProveedor(attachedMateriales);
             em.persist(proveedor);
+            for (Materiales materiales : proveedor.getMaterialesProveedor()) {
+                Proveedor oldProveedor = materiales.getMaterialProveedor();
+                materiales.setMaterialProveedor(proveedor);
+                materiales = em.merge(materiales);
+                if (oldProveedor != null) {
+                    oldProveedor.getMaterialesProveedor().remove(materiales);
+                    oldProveedor = em.merge(oldProveedor);
+                }
+            }
             em.getTransaction().commit();
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
-    // Editar un proveedor existente
     public void edit(Proveedor proveedor) throws Exception {
-        EntityManager em = getEntityManager();
+        EntityManager em = null;
         try {
+            em = getEntityManager();
             em.getTransaction().begin();
+            Proveedor persistentProveedor = em.find(Proveedor.class, proveedor.getIdProveedor());
+            List<Materiales> materialesOld = persistentProveedor.getMaterialesProveedor();
+            List<Materiales> materialesNew = proveedor.getMaterialesProveedor();
+            List<Materiales> attachedMaterialesNew = new ArrayList<>();
+            for (Materiales materiales : materialesNew) {
+                materiales = em.getReference(materiales.getClass(), materiales.getIdMaterial());
+                attachedMaterialesNew.add(materiales);
+            }
+            materialesNew = attachedMaterialesNew;
+            proveedor.setMaterialesProveedor(materialesNew);
             proveedor = em.merge(proveedor);
+            for (Materiales materialesOldItem : materialesOld) {
+                if (!materialesNew.contains(materialesOldItem)) {
+                    materialesOldItem.setMaterialProveedor(null);
+                    materialesOldItem = em.merge(materialesOldItem);
+                }
+            }
+            for (Materiales materialesNewItem : materialesNew) {
+                if (!materialesOld.contains(materialesNewItem)) {
+                    Proveedor oldProveedorOfMateriales = materialesNewItem.getMaterialProveedor();
+                    materialesNewItem.setMaterialProveedor(proveedor);
+                    materialesNewItem = em.merge(materialesNewItem);
+                    if (oldProveedorOfMateriales != null && !oldProveedorOfMateriales.equals(proveedor)) {
+                        oldProveedorOfMateriales.getMaterialesProveedor().remove(materialesNewItem);
+                        oldProveedorOfMateriales = em.merge(oldProveedorOfMateriales);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
-            throw new Exception("Error al editar proveedor: " + ex.getMessage(), ex);
+            int id = proveedor.getIdProveedor();
+            if (findProveedor(id) == null) {
+                throw new Exception("The proveedor with id " + id + " no longer exists.");
+            }
+            throw ex;
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
-    // Eliminar un proveedor por ID
     public void destroy(int id) throws Exception {
-        EntityManager em = getEntityManager();
+        EntityManager em = null;
         try {
+            em = getEntityManager();
             em.getTransaction().begin();
             Proveedor proveedor;
             try {
                 proveedor = em.getReference(Proveedor.class, id);
-                proveedor.getIdProveedor(); // fuerza la carga
+                proveedor.getIdProveedor();
             } catch (EntityNotFoundException enfe) {
-                throw new Exception("El proveedor con id " + id + " no existe.", enfe);
+                throw new Exception("The proveedor with id " + id + " no longer exists.", enfe);
+            }
+            List<Materiales> materialesProveedor = proveedor.getMaterialesProveedor();
+            for (Materiales materiales : materialesProveedor) {
+                materiales.setMaterialProveedor(null);
+                materiales = em.merge(materiales);
             }
             em.remove(proveedor);
             em.getTransaction().commit();
         } finally {
-            em.close();
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
-    // Obtener todos los proveedores
     public List<Proveedor> findProveedorEntities() {
         return findProveedorEntities(true, -1, -1);
     }
 
-    // Obtener proveedores con paginación
     public List<Proveedor> findProveedorEntities(int maxResults, int firstResult) {
         return findProveedorEntities(false, maxResults, firstResult);
     }
@@ -85,7 +145,9 @@ public class ProveedorJpaController implements Serializable {
     private List<Proveedor> findProveedorEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("SELECT p FROM Proveedor p");
+            CriteriaQuery<Proveedor> cq = em.getCriteriaBuilder().createQuery(Proveedor.class);
+            cq.select(cq.from(Proveedor.class));
+            Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -96,7 +158,6 @@ public class ProveedorJpaController implements Serializable {
         }
     }
 
-    // Buscar un proveedor por ID
     public Proveedor findProveedor(int id) {
         EntityManager em = getEntityManager();
         try {
@@ -106,11 +167,13 @@ public class ProveedorJpaController implements Serializable {
         }
     }
 
-    // Contar proveedores
     public int getProveedorCount() {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("SELECT COUNT(p) FROM Proveedor p");
+            CriteriaQuery<Long> cq = em.getCriteriaBuilder().createQuery(Long.class);
+            Root<Proveedor> rt = cq.from(Proveedor.class);
+            cq.select(em.getCriteriaBuilder().count(rt));
+            Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();

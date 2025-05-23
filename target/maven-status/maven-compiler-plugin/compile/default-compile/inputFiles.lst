@@ -1,0 +1,16 @@
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\GestorMuebles.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Igu\MenuPrincipal.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Igu\RegistroMaterial1.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Igu\RegistroProveedor1.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Logica\Controlador.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Logica\Materiales.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Logica\Proveedor.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Logica\Proyecto.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Logica\Receta.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Logica\RecetaMaterial.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Logica\Usuario.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Persistencia\ControladorPersistencia.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Persistencia\exceptions\IllegalOrphanException.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Persistencia\exceptions\NonexistentEntityException.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Persistencia\exceptions\PreexistingEntityException.java
+C:\Users\Jseba\OneDrive\Documentos\NetBeansProjects\GestorMuebles\src\main\java\com\mycompany\gestormuebles\Persistencia\ProveedorJpaController.java

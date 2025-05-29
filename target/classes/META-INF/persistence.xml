@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.mycompany.gestormuebles.Logica.Proveedor</class>
     <class>com.mycompany.gestormuebles.Logica.Materiales</class>
+    <class>com.mycompany.gestormuebles.Logica.CategoriaMaterial</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdgestorinventario?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -23,23 +23,28 @@ public class Materiales implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int idMaterial;
     private String nombreMaterial;
-    private String tipoMaterial;
     private int cantidadMaterial;
     
     @ManyToOne
     @JoinColumn(name = "id_Proveedor")
     private Proveedor materialProveedor;
     
+    @ManyToOne
+    @JoinColumn (name = "idcategoriaMaterial")
+    private CategoriaMaterial categoriaMaterial;
+    
     public Materiales() {
     }
 
-    public Materiales(int idMaterial, String nombreMaterial, String tipoMaterial, int cantidadMaterial, Proveedor materialProveedor) {
+    public Materiales(int idMaterial, String nombreMaterial, int cantidadMaterial, Proveedor materialProveedor, CategoriaMaterial categoriaMaterial) {
         this.idMaterial = idMaterial;
         this.nombreMaterial = nombreMaterial;
-        this.tipoMaterial = tipoMaterial;
         this.cantidadMaterial = cantidadMaterial;
         this.materialProveedor = materialProveedor;
+        this.categoriaMaterial = categoriaMaterial;
     }
+
+   
 
     public int getIdMaterial() {
         return idMaterial;
@@ -57,14 +62,6 @@ public class Materiales implements Serializable {
         this.nombreMaterial = nombreMaterial;
     }
 
-    public String getTipoMaterial() {
-        return tipoMaterial;
-    }
-
-    public void setTipoMaterial(String tipoMaterial) {
-        this.tipoMaterial = tipoMaterial;
-    }
-
     public int getCantidadMaterial() {
         return cantidadMaterial;
     }
@@ -79,6 +76,14 @@ public class Materiales implements Serializable {
 
     public void setMaterialProveedor(Proveedor materialProveedor) {
         this.materialProveedor = materialProveedor;
+    }
+
+    public CategoriaMaterial getCategoriaMaterial() {
+        return categoriaMaterial;
+    }
+
+    public void setCategoriaMaterial(CategoriaMaterial categoriaMaterial) {
+        this.categoriaMaterial = categoriaMaterial;
     }
     
     

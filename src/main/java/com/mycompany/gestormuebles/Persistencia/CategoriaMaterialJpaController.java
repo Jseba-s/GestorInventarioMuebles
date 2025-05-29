@@ -1,40 +1,40 @@
-package com.mycompany.gestormuebles.persistencia;
+package com.mycompany.gestormuebles.Logica;
 
-import com.mycompany.gestormuebles.Logica.Proveedor;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class ProveedorJpaController implements Serializable {
+public class CategoriaMaterialJpaController implements Serializable {
 
     private EntityManagerFactory emf = null;
 
-    public ProveedorJpaController(){
+     public CategoriaMaterialJpaController(){
         emf = Persistence.createEntityManagerFactory("GestorMueblesPU");
     }
-    
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
+    
 
-    public void create(Proveedor proveedor) {
+    public void create(CategoriaMaterial categoriaMaterial) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(proveedor);
+            em.persist(categoriaMaterial);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
 
-    public void edit(Proveedor proveedor) throws Exception {
+    public void edit(CategoriaMaterial categoriaMaterial) throws Exception {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.merge(proveedor);
+            em.merge(categoriaMaterial);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -45,30 +45,30 @@ public class ProveedorJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            Proveedor proveedor = em.find(Proveedor.class, id);
-            if (proveedor == null) {
-                throw new Exception("El proveedor con id " + id + " no existe.");
+            CategoriaMaterial categoriaMaterial = em.find(CategoriaMaterial.class, id);
+            if (categoriaMaterial == null) {
+                throw new Exception("La categoría con id " + id + " no existe.");
             }
-            em.remove(proveedor);
+            em.remove(categoriaMaterial);
             em.getTransaction().commit();
         } finally {
             em.close();
         }
     }
 
-    public Proveedor findProveedor(int id) {
+    public CategoriaMaterial findCategoriaMaterial(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Proveedor.class, id);
+            return em.find(CategoriaMaterial.class, id);
         } finally {
             em.close();
         }
     }
 
-    public List<Proveedor> findProveedorEntities() {
+    public List<CategoriaMaterial> findCategoriaMaterialEntities() {
         EntityManager em = getEntityManager();
         try {
-            return em.createQuery("SELECT p FROM Proveedor p", Proveedor.class).getResultList();
+            return em.createQuery("SELECT c FROM CategoriaMaterial c", CategoriaMaterial.class).getResultList();
         } finally {
             em.close();
         }

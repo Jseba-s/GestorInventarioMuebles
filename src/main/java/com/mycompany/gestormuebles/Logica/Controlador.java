@@ -31,6 +31,35 @@ public class Controlador {
     controlpersis.guardarProveedor(proveedorobj);
     }
 
+    public List<Materiales> traerMateriales() {
+        return controlpersis.traerMateriales();
+    }
+
+    public List<CategoriaMaterial> traerCatogorias() {
+        return controlpersis.traerCategoria();
+    }
+
+    public void eliminarProveedor(int id_Proveedor) {
+        controlpersis.eliminarProveedor(id_Proveedor);
+    }
+
+    public Proveedor traerProveedores(int id_usuario) {
+        return controlpersis.traerProveedores(id_usuario);
+    }
+
+    public void modificarProveedor(Proveedor proveedor1, String nombreEp, String contactoEp, String telefonoEp, String direccionEp, String correoEp, String estadoP) {
+        proveedor1.setNombreProveedor(nombreEp);
+        proveedor1.setContactoProveedor(contactoEp);
+        proveedor1.setTelefonoProveedor(telefonoEp);
+        proveedor1.setDireccion(direccionEp);
+        proveedor1.setCorreoProveedor(correoEp);
+        proveedor1.setEstado(estadoP);
+        
+        controlpersis.editarProveedor(proveedor1);
+    }
+
+    
+
     
   
 }

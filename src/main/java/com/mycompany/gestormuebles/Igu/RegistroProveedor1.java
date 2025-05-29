@@ -6,6 +6,7 @@ package com.mycompany.gestormuebles.Igu;
 
 import com.mycompany.gestormuebles.Logica.Controlador;
 import com.mycompany.gestormuebles.Logica.Proveedor;
+import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,6 +18,8 @@ import javax.swing.table.DefaultTableModel;
 public class RegistroProveedor1 extends javax.swing.JPanel {
 
     Controlador controlLogica = new Controlador();
+
+    private List<Proveedor> listaProveedor;
 
     /**
      * Creates new form RegistroProveedor1
@@ -31,10 +34,12 @@ public class RegistroProveedor1 extends javax.swing.JPanel {
             }
 
             @Override
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {}
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
 
             @Override
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {}
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
         });
     }
 
@@ -51,7 +56,7 @@ public class RegistroProveedor1 extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TblDatosProveedores = new javax.swing.JTable();
-        BtnInfProveedor = new javax.swing.JButton();
+        BtnEditarProveedor = new javax.swing.JButton();
         BtnEliminarProveedor = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -113,11 +118,12 @@ public class RegistroProveedor1 extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(TblDatosProveedores);
 
-        BtnInfProveedor.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        BtnInfProveedor.setText("INFORMACIÓN");
-        BtnInfProveedor.addActionListener(new java.awt.event.ActionListener() {
+        BtnEditarProveedor.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        BtnEditarProveedor.setText("EDITAR");
+        BtnEditarProveedor.setToolTipText("");
+        BtnEditarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnInfProveedorActionPerformed(evt);
+                BtnEditarProveedorActionPerformed(evt);
             }
         });
 
@@ -295,7 +301,7 @@ public class RegistroProveedor1 extends javax.swing.JPanel {
                         .addGap(0, 65, Short.MAX_VALUE))
                     .addGroup(Contenedor1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
-                        .addComponent(BtnInfProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BtnEditarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(BtnEliminarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56))))
@@ -309,7 +315,7 @@ public class RegistroProveedor1 extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(Contenedor1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnInfProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnEditarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnEliminarProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(40, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -574,11 +580,44 @@ public class RegistroProveedor1 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnInfProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInfProveedorActionPerformed
+    private void BtnEditarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarProveedorActionPerformed
+        if (TblDatosProveedores.getRowCount() > 0) {
+            //Validar que un valor este siendo sleccionado
+            if (TblDatosProveedores.getSelectedRow() != -1) {
+                //Convertir el valor de objeto a string y de string a entero
+                int id_usuario = Integer.parseInt(String.valueOf(TblDatosProveedores.getValueAt(TblDatosProveedores.getSelectedRow(), 0)));
+                //abrir el usuario
+                EditarProveedor editar = new EditarProveedor(id_usuario, controlLogica, this);
+                editar.setVisible(true);
+                editar.setLocationRelativeTo(null);
 
-    }//GEN-LAST:event_BtnInfProveedorActionPerformed
+            } else {
+                MostrarMensaje("No se selecciono a un elemento a editar", "Error", "Error");
+            }
+        } else {
+            MostrarMensaje("La tabla no tiene datos", "Error", "Error");
+        }
+        CargarTabla();
+
+    }//GEN-LAST:event_BtnEditarProveedorActionPerformed
 
     private void BtnEliminarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarProveedorActionPerformed
+        if (TblDatosProveedores.getRowCount() > 0) {
+            if (TblDatosProveedores.getSelectedRow() != -1) {
+                int id_Proveedor = Integer.parseInt(String.valueOf(TblDatosProveedores.getValueAt(TblDatosProveedores.getSelectedRow(), 0)));
+                controlLogica.eliminarProveedor(id_Proveedor);
+                MostrarMensaje("Se borro correctamente", "Info", "Eliminar");
+                CargarTabla();
+            } else {
+                MostrarMensaje("No se selecciono a un elemento a borrar", "Error", "Error");
+
+            }
+        } else {
+            MostrarMensaje("La tabla no tiene datos", "Error", "Error");
+
+        }
+
+        CargarTabla();
 
     }//GEN-LAST:event_BtnEliminarProveedorActionPerformed
 
@@ -613,7 +652,7 @@ public class RegistroProveedor1 extends javax.swing.JPanel {
         } else {
             controlLogica.guardarProveedor(nombreP, contactoP, telefonoP, direccionP, correoP, estadoP);
             JOptionPane.showMessageDialog(null, "Se guardo correctamente al proveedor", "Información", JOptionPane.INFORMATION_MESSAGE);
-            
+
             CargarTabla();
         }
 
@@ -663,9 +702,9 @@ public class RegistroProveedor1 extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnEditarProveedor;
     private javax.swing.JButton BtnEliminarProveedor;
     private javax.swing.JButton BtnEliminarProveedor1;
-    private javax.swing.JButton BtnInfProveedor;
     private javax.swing.JButton BtnInfProveedor1;
     private javax.swing.JButton BtnLimpiarProveedor;
     private javax.swing.JButton BtnLimpiarProveedor1;
@@ -710,7 +749,7 @@ public class RegistroProveedor1 extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 
-    private void CargarTabla() {
+    void CargarTabla() {
 
         //Definir Modelo de la tabla y que las columnas no sean editables
         DefaultTableModel tabla = new DefaultTableModel() {
@@ -725,16 +764,27 @@ public class RegistroProveedor1 extends javax.swing.JPanel {
         tabla.setColumnIdentifiers(titulos);
 
         //Cargar los datos
-        List<Proveedor> listaProveedor = controlLogica.traerProveedores();
+        listaProveedor = controlLogica.traerProveedores();
 
         //Recorrer la lista
         if (listaProveedor != null) {
             for (Proveedor proveedor : listaProveedor) {
                 Object[] objeto = {proveedor.getIdProveedor(), proveedor.getNombreProveedor(), proveedor.getContactoProveedor(),
-                proveedor.getTelefonoProveedor(), proveedor.getCorreoProveedor(), proveedor.getEstado()};
+                    proveedor.getTelefonoProveedor(), proveedor.getCorreoProveedor(), proveedor.getEstado()};
                 tabla.addRow(objeto);
             }
         }
         TblDatosProveedores.setModel(tabla);
+    }
+
+    public void MostrarMensaje(String mensaje, String tipoMensaje, String titulo) {
+        int tipo = 0;
+        if (tipoMensaje.equals("Info")) {
+            tipo = JOptionPane.INFORMATION_MESSAGE;
+        } else if (tipoMensaje.equals("Error")) {
+            tipo = JOptionPane.WARNING_MESSAGE;
+
+        }
+        JOptionPane.showMessageDialog(null, mensaje, titulo, tipo);
     }
 }

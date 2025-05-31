@@ -59,5 +59,29 @@ public class ControladorPersistencia {
             Logger.getLogger(ControladorPersistencia.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void guardarMaterial(Materiales materialobj) {
+       materialesJPA.create(materialobj);
+    }
+
+    public void eliminarMaterial(int id_Material) {
+        try {
+            materialesJPA.destroy(id_Material);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladorPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Materiales traerMateriales(int id_Materiales) {
+        return materialesJPA.findMateriales(id_Materiales);
+    }
+
+    public void editarMaterial(Materiales material1) {
+        try {
+            materialesJPA.edit(material1);
+        } catch (Exception ex) {
+            Logger.getLogger(ControladorPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

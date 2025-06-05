@@ -76,6 +76,7 @@ public class ControladorPersistencia {
         return materialesJPA.findMateriales(id_Materiales);
     }
 
+   
     public void editarMaterial(Materiales material1) {
         try {
             materialesJPA.edit(material1);

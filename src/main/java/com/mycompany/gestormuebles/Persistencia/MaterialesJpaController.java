@@ -34,7 +34,14 @@ public class MaterialesJpaController implements Serializable {
         em.getTransaction().commit();
         em.close();
     }
-
+    
+     public void edit(Materiales materiales) throws Exception {
+        EntityManager em = getEntityManager();
+        em.getTransaction().begin();
+        materiales = em.merge(materiales);
+        em.getTransaction().commit();
+        em.close();
+    }
     
 
     public void destroy(int id) throws Exception {

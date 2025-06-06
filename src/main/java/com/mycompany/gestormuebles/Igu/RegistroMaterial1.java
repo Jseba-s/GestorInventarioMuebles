@@ -355,6 +355,7 @@ public class RegistroMaterial1 extends javax.swing.JPanel {
             controlLogica.guardarMaterial(Nombrematerial, proveedor, categoria, cantidadf);
             JOptionPane.showMessageDialog(null, "Se guardó correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
             CargarDatos();
+            cargarTabla();
         }
 
     }//GEN-LAST:event_BtnRegistrarMaterialActionPerformed

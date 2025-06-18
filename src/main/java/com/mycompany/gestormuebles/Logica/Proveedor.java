@@ -31,6 +31,8 @@ public class Proveedor implements Serializable {
     
     @OneToMany(mappedBy = "materialProveedor")
     private List<Materiales> materialesProveedor; 
+    
+    
     public Proveedor() {
     }
 

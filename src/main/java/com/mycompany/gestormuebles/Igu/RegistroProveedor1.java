@@ -191,7 +191,7 @@ public class RegistroProveedor1 extends javax.swing.JPanel {
         });
 
         BtnLimpiarProveedor.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        BtnLimpiarProveedor.setText("Limpiar");
+        BtnLimpiarProveedor.setText("LIMPIAR");
         BtnLimpiarProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnLimpiarProveedorActionPerformed(evt);

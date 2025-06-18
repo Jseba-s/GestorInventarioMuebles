@@ -4,14 +4,28 @@
  */
 package com.mycompany.gestormuebles.Logica;
 
+import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 /**
  *
  * @author Jseba
  */
+@Entity
 public class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int idUsuario;
     private String nombreUsuario;
-    private String passwordUsuario;
+    private String passwordUsuario; 
+ 
+    
+    @OneToMany(mappedBy = "usuario_Proyecto")
+    private List<Proyecto> usuarioProyecto;
 
     public Usuario() {
     }
@@ -44,6 +58,14 @@ public class Usuario {
 
     public void setPasswordUsuario(String passwordUsuario) {
         this.passwordUsuario = passwordUsuario;
+    }
+
+    public List<Proyecto> getUsuarioProyecto() {
+        return usuarioProyecto;
+    }
+
+    public void setUsuarioProyecto(List<Proyecto> usuarioProyecto) {
+        this.usuarioProyecto = usuarioProyecto;
     }
     
     

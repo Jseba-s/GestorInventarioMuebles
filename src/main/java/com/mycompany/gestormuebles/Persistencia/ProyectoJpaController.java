@@ -2,16 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.gestormuebles.Logica;
+package com.mycompany.gestormuebles.Persistencia;
+
+import java.io.Serializable;
 
 /**
  *
  * @author Jseba
  */
-public class RecetaMaterial {
-    private int idRecetaMaterial;
-    private Receta recetaM;
-    private Materiales materialReceta;
-    private int cantidadNecesaria;
+public class ProyectoJpaController implements Serializable {
     
 }

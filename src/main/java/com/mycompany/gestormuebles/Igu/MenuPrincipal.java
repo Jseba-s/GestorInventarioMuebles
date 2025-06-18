@@ -30,12 +30,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         BtnProyectos = new javax.swing.JButton();
-        BtnProveedores = new javax.swing.JButton();
+        BtnInicio = new javax.swing.JButton();
         BtnMateriales = new javax.swing.JButton();
+        BtnRecetas = new javax.swing.JButton();
         BtnCerrar = new javax.swing.JButton();
+        BtnProveedores = new javax.swing.JButton();
         Contenedor = new javax.swing.JPanel();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,13 +54,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        BtnProveedores.setBackground(new java.awt.Color(209, 213, 216));
-        BtnProveedores.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        BtnProveedores.setForeground(new java.awt.Color(0, 0, 0));
-        BtnProveedores.setText("PROVEEDORES");
-        BtnProveedores.addActionListener(new java.awt.event.ActionListener() {
+        BtnInicio.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        BtnInicio.setText("INICIO");
+        BtnInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnProveedoresActionPerformed(evt);
+                BtnInicioActionPerformed(evt);
             }
         });
 
@@ -67,6 +70,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        BtnRecetas.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        BtnRecetas.setText("RECETAS");
+        BtnRecetas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRecetasActionPerformed(evt);
+            }
+        });
+
         BtnCerrar.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
         BtnCerrar.setText("CERRAR");
         BtnCerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -75,33 +86,46 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        BtnProveedores.setBackground(new java.awt.Color(209, 213, 216));
+        BtnProveedores.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
+        BtnProveedores.setForeground(new java.awt.Color(0, 0, 0));
+        BtnProveedores.setText("PROVEEDORES");
+        BtnProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnProveedoresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BtnProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-            .addComponent(BtnProyectos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(BtnProyectos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(BtnInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(BtnMateriales, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+            .addComponent(BtnRecetas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BtnCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(BtnMateriales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
+            .addComponent(BtnProveedores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(176, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(BtnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addComponent(BtnProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(99, 99, 99)
-                .addComponent(BtnCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(252, Short.MAX_VALUE)
-                    .addComponent(BtnMateriales, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(230, 230, 230)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnMateriales, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnRecetas, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BtnCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         Contenedor.setBackground(new java.awt.Color(255, 255, 255));
+        Contenedor.setPreferredSize(new java.awt.Dimension(849, 559));
 
         javax.swing.GroupLayout ContenedorLayout = new javax.swing.GroupLayout(Contenedor);
         Contenedor.setLayout(ContenedorLayout);
@@ -111,7 +135,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         ContenedorLayout.setVerticalGroup(
             ContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 559, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -120,14 +144,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Contenedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(Contenedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,6 +186,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void BtnProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnProyectosActionPerformed
         // TODO add your handling code here:
+        
+        RegistroProyecto registroProyecto = new RegistroProyecto();
+        registroProyecto.setSize(849, 559);
+        registroProyecto.setLocation(0, 0);
+        Contenedor.removeAll();
+        Contenedor.add(registroProyecto);
+        Contenedor.revalidate();
+        Contenedor.repaint();
     }//GEN-LAST:event_BtnProyectosActionPerformed
 
     private void BtnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCerrarActionPerformed
@@ -167,14 +201,40 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BtnCerrarActionPerformed
 
+    private void BtnRecetasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRecetasActionPerformed
+        // TODO add your handling code here:
+        RegistroReceta registroReceta = new RegistroReceta();
+        registroReceta.setSize(849, 559);
+        registroReceta.setLocation(0, 0);
+        Contenedor.removeAll();
+        Contenedor.add(registroReceta);
+        Contenedor.revalidate();
+        Contenedor.repaint();
+    }//GEN-LAST:event_BtnRecetasActionPerformed
+
+    private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
+       
+        MaterialesRegistrados inicioMaterial = new MaterialesRegistrados();
+        inicioMaterial.setSize(849, 559);
+        inicioMaterial.setLocation(0, 0);
+        Contenedor.removeAll();
+        Contenedor.add(inicioMaterial);
+        Contenedor.revalidate();
+        Contenedor.repaint();
+        
+    }//GEN-LAST:event_BtnInicioActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCerrar;
+    private javax.swing.JButton BtnInicio;
     private javax.swing.JButton BtnMateriales;
     private javax.swing.JButton BtnProveedores;
     private javax.swing.JButton BtnProyectos;
+    private javax.swing.JButton BtnRecetas;
     private javax.swing.JPanel Contenedor;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

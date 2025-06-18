@@ -4,32 +4,50 @@
  */
 package com.mycompany.gestormuebles.Logica;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Jseba
  */
-public class Proyecto {
+
+@Entity
+public class Proyecto implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int idProyecto;
     private String nombreProyecto;
     private Date fechaInicio;
     private Date fechaterminada;
     private boolean estado;
+    
+    @ManyToOne
+    @JoinColumn(name = "idReceta")
     private Receta recetaUsada;
-    private Usuario usuarioProyecto;
+    
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario_Proyecto;
+    
 
     public Proyecto() {
     }
 
-    public Proyecto(int idProyecto, String nombreProyecto, Date fechaInicio, Date fechaterminada, boolean estado, Receta recetaUsada, Usuario usuarioProyecto) {
+    public Proyecto(int idProyecto, String nombreProyecto, Date fechaInicio, Date fechaterminada, boolean estado, Receta recetaUsada, Usuario usuario_Proyecto) {
         this.idProyecto = idProyecto;
         this.nombreProyecto = nombreProyecto;
         this.fechaInicio = fechaInicio;
         this.fechaterminada = fechaterminada;
         this.estado = estado;
         this.recetaUsada = recetaUsada;
-        this.usuarioProyecto = usuarioProyecto;
+        this.usuario_Proyecto = usuario_Proyecto;
     }
 
     public int getIdProyecto() {
@@ -80,12 +98,12 @@ public class Proyecto {
         this.recetaUsada = recetaUsada;
     }
 
-    public Usuario getUsuarioProyecto() {
-        return usuarioProyecto;
+    public Usuario getusuario_Proyecto() {
+        return usuario_Proyecto;
     }
 
-    public void setUsuarioProyecto(Usuario usuarioProyecto) {
-        this.usuarioProyecto = usuarioProyecto;
+    public void setusuario_Proyecto(Usuario usuario_Proyecto) {
+        this.usuario_Proyecto = usuario_Proyecto;
     }
     
 }

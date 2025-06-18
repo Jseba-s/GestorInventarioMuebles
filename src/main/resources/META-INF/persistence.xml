@@ -5,6 +5,10 @@
     <class>com.mycompany.gestormuebles.Logica.Proveedor</class>
     <class>com.mycompany.gestormuebles.Logica.Materiales</class>
     <class>com.mycompany.gestormuebles.Logica.CategoriaMaterial</class>
+    <class>com.mycompany.gestormuebles.Logica.Proyecto</class>
+    <class>com.mycompany.gestormuebles.Logica.Receta</class>
+    <class>com.mycompany.gestormuebles.Logica.Usuario</class>
+    <class>com.mycompany.gestormuebles.Logica.Receta_Material</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdgestorinventario?serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

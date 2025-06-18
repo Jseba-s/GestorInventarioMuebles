@@ -5,6 +5,7 @@
 package com.mycompany.gestormuebles.Logica;
 
 import com.mycompany.gestormuebles.Persistencia.ControladorPersistencia;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -119,6 +120,37 @@ public class Controlador {
         
        controlpersis.editarMaterial(material1);
     }
+
+    public void guardarReceta(Receta receta) {
+        controlpersis.guardarReceta(receta);
+    }
+
+    public void guardarRecetaMaterial(Receta_Material recetaMaterial) {
+        controlpersis.guardarRecetaMaterial(recetaMaterial);
+    }
+
+    public List<Receta> traerRecetas() {
+        return controlpersis.traerRecetas();
+    }
+
+    public void eliminarReceta(int idReceta) {
+        Receta receta = controlpersis.traerRecetas(idReceta);
+        if (receta != null) {
+            List<Receta_Material> relaciones = receta.getListaMateriales();
+            for (Receta_Material rm : new ArrayList<>(relaciones)){
+                controlpersis.eliminarRelacion(rm.getIdRecetaMaterial());
+            }
+            controlpersis.eliminarReceta(idReceta);
+        }
+    }
+
+    
+    public Receta traerReceta(int idReceta){
+        return controlpersis.traerRecetas(idReceta);
+    }
+   
+
+    
 
     
 

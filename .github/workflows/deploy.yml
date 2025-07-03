@@ -18,34 +18,36 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Compilar proyecto
+      - name: Compilar el proyecto
         run: mvn clean compile
 
       - name: Ejecutar pruebas
         run: mvn test
 
-      - name: Construir JAR
+      - name: Empaquetar JAR
         run: mvn package
+
+      - name: Verificar que el JAR fue generado
+        run: |
+          ls -l target/
+          test -f target/*.jar
 
       - name: Subir JAR a rama deploy-artifacts
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
-          # Guardar temporalmente el jar
+          # Guardar temporalmente el JAR
           mkdir temp-jar
           cp target/*.jar temp-jar/
 
-          # Limpiar el directorio de trabajo (evita conflicto con git switch)
-          rm -rf *
-
-          # Cambiar a rama vacía sin historial
+          # Cambiar de rama SIN borrar la carpeta temporal
           git fetch origin
           git switch --orphan deploy-artifacts
           git reset --hard
           git clean -fd
-
-          # Recuperar el .jar y subirlo
+          
+          # Recuperar y subir el jar
           cp temp-jar/*.jar .
           git add *.jar
           git commit -m "Despliegue automático del JAR"

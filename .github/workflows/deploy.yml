@@ -41,14 +41,15 @@ jobs:
           mkdir temp-jar
           cp target/*.jar temp-jar/
 
-          # Cambiar de rama SIN borrar la carpeta temporal
+          # Cambiar de rama sin perder archivos
           git fetch origin
           git switch --orphan deploy-artifacts
           git reset --hard
           git clean -fd
           
-          # Recuperar y subir el jar
+          # Restaurar y subir el JAR
           cp temp-jar/*.jar .
           git add *.jar
           git commit -m "Despliegue automático del JAR"
           git push --force origin deploy-artifacts
+

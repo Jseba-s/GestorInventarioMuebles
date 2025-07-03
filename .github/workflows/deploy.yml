@@ -32,6 +32,12 @@ jobs:
           ls -l target/
           test -f target/*.jar
 
+      - name: Subir JAR como artefacto (descargable desde GitHub Actions)
+        uses: actions/upload-artifact@v4
+        with:
+          name: gestor-muebles-jar
+          path: target/*.jar
+
       - name: Subir JAR a rama deploy-artifacts
         run: |
           git config --global user.name "github-actions"
@@ -52,4 +58,3 @@ jobs:
           git add *.jar
           git commit -m "Despliegue automático del JAR"
           git push --force origin deploy-artifacts
-

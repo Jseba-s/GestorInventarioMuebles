@@ -32,7 +32,7 @@ jobs:
           ls -l target/
           test -f target/*.jar
 
-      - name: Subir JAR como artefacto (descargable desde GitHub Actions)
+      - name: Subir JAR como artefacto (GitHub Actions)
         uses: actions/upload-artifact@v4
         with:
           name: gestor-muebles-jar
@@ -47,12 +47,15 @@ jobs:
           mkdir temp-jar
           cp target/*.jar temp-jar/
 
-          # Cambiar de rama sin perder archivos
+          # Eliminar target para evitar conflicto al cambiar de rama
+          rm -rf target/
+
+          # Cambiar a rama deploy-artifacts desde cero
           git fetch origin
           git switch --orphan deploy-artifacts
           git reset --hard
           git clean -fd
-          
+
           # Restaurar y subir el JAR
           cp temp-jar/*.jar .
           git add *.jar

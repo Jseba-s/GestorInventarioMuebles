@@ -12,7 +12,7 @@ jobs:
       - name: Clonar el repositorio
         uses: actions/checkout@v3
 
-      - name: Configurar Java
+      - name: Configurar Java 21
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
@@ -32,14 +32,21 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
-          mkdir temp-folder
-          cp target/*.jar temp-folder/
+          # Guardar temporalmente el jar
+          mkdir temp-jar
+          cp target/*.jar temp-jar/
 
+          # Limpiar el directorio de trabajo (evita conflicto con git switch)
+          rm -rf *
+
+          # Cambiar a rama vacía sin historial
           git fetch origin
           git switch --orphan deploy-artifacts
-          git rm -rf .
+          git reset --hard
+          git clean -fd
 
-          cp temp-folder/*.jar .
+          # Recuperar el .jar y subirlo
+          cp temp-jar/*.jar .
           git add *.jar
-          git commit -m "Deploy automático del JAR"
+          git commit -m "Despliegue automático del JAR"
           git push --force origin deploy-artifacts

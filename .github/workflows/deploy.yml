@@ -43,21 +43,23 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
 
-          # Guardar temporalmente el JAR
-          mkdir temp-jar
-          cp target/*.jar temp-jar/
+          # Guardar el JAR en un lugar fuera del repositorio (seguro)
+          mkdir -p $HOME/temp-jar
+          cp target/*.jar $HOME/temp-jar/
 
-          # Eliminar target para evitar conflicto al cambiar de rama
+          # Eliminar directorio target para evitar conflicto de git
           rm -rf target/
 
-          # Cambiar a rama deploy-artifacts desde cero
+          # Cambiar a rama 'deploy-artifacts' desde cero
           git fetch origin
           git switch --orphan deploy-artifacts
           git reset --hard
           git clean -fd
 
-          # Restaurar y subir el JAR
-          cp temp-jar/*.jar .
+          # Restaurar el JAR desde la ruta segura
+          cp $HOME/temp-jar/*.jar .
+
+          # Subir el JAR a la nueva rama
           git add *.jar
           git commit -m "Despliegue automático del JAR"
           git push --force origin deploy-artifacts

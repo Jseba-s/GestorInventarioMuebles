@@ -1,0 +1,21 @@
+name: Checkstyle Java
+
+on:
+  push:
+    branches: [ PrimerAvance ]
+
+jobs:
+  checkstyle:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'  
+
+      - name: Ejecutar Checkstyle
+        run: ./gradlew checkstyleMain

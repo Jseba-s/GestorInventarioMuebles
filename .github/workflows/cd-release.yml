@@ -1,0 +1,32 @@
+name: Entrega Continua - Publicar Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Construir JAR
+        run: ./gradlew clean build
+
+      - name: Crear Release y subir JAR
+        uses: softprops/action-gh-release@v1
+        with:
+          name: "Release ${{ github.ref_name }}"
+          tag_name: ${{ github.ref_name }}
+          files: build/libs/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

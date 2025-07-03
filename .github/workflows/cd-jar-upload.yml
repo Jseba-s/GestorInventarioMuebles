@@ -1,0 +1,27 @@
+name: Entrega Continua - Subida de JAR
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configurar Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin' 
+
+      - name: Construir JAR
+        run: ./gradlew clean build
+
+      - name: Subir archivo JAR
+        uses: actions/upload-artifact@v3
+        with:
+          name: muebleria-jar
+          path: build/libs/*.jar

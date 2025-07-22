@@ -1,4 +1,4 @@
-package com.mycompany.gestormuebles.persistencia;
+package com.mycompany.gestormuebles.Persistencia;
 
 import com.mycompany.gestormuebles.Logica.Proveedor;
 import java.io.Serializable;

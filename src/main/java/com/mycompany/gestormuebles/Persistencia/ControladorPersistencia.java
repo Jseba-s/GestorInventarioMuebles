@@ -5,15 +5,15 @@
 package com.mycompany.gestormuebles.Persistencia;
 
 import com.mycompany.gestormuebles.Logica.CategoriaMaterial;
-import com.mycompany.gestormuebles.Logica.CategoriaMaterialJpaController;
+import com.mycompany.gestormuebles.Persistencia.CategoriaMaterialJpaController;
 import com.mycompany.gestormuebles.Logica.Materiales;
 import com.mycompany.gestormuebles.Logica.Proveedor;
 import com.mycompany.gestormuebles.Logica.Receta;
 import com.mycompany.gestormuebles.Logica.Receta_Material;
 import com.mycompany.gestormuebles.Persistencia.exceptions.NonexistentEntityException;
-import com.mycompany.gestormuebles.persistencia.MaterialesJpaController;
-import com.mycompany.gestormuebles.persistencia.ProveedorJpaController;
-import com.mycompany.gestormuebles.persistencia.RecetaJpaController;
+import com.mycompany.gestormuebles.Persistencia.MaterialesJpaController;
+import com.mycompany.gestormuebles.Persistencia.ProveedorJpaController;
+import com.mycompany.gestormuebles.Persistencia.RecetaJpaController;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

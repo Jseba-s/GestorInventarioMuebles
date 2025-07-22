@@ -1,10 +1,12 @@
-package com.mycompany.gestormuebles.Logica;
+package com.mycompany.gestormuebles.Persistencia;
 
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
+import com.mycompany.gestormuebles.Logica.CategoriaMaterial;
 
 public class CategoriaMaterialJpaController implements Serializable {
 

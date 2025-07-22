@@ -8,6 +8,7 @@ import com.mycompany.gestormuebles.Logica.Controlador;
 import com.mycompany.gestormuebles.Logica.Materiales;
 import com.mycompany.gestormuebles.Logica.Receta;
 import com.mycompany.gestormuebles.Logica.Receta_Material;
+import com.mycompany.gestormuebles.Logica.ReporteRecetasService;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -59,6 +60,7 @@ public class RegistroReceta extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         TblMateriales = new javax.swing.JTable();
         BtnRecetasCreadas = new javax.swing.JButton();
+        BtnGenerarReporte = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -76,7 +78,6 @@ public class RegistroReceta extends javax.swing.JPanel {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("LISTA DE MATERIALES");
 
         TblMateriales.setModel(new javax.swing.table.DefaultTableModel(
@@ -99,6 +100,13 @@ public class RegistroReceta extends javax.swing.JPanel {
             }
         });
 
+        BtnGenerarReporte.setText("Generar Reporte");
+        BtnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGenerarReporteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -110,9 +118,13 @@ public class RegistroReceta extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addGap(73, 73, 73))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BtnRecetasCreadas))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(BtnGenerarReporte)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtnRecetasCreadas)))
                         .addGap(14, 14, 14))))
         );
         jPanel3Layout.setVerticalGroup(
@@ -123,8 +135,10 @@ public class RegistroReceta extends javax.swing.JPanel {
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BtnRecetasCreadas, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(BtnRecetasCreadas, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                    .addComponent(BtnGenerarReporte, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -345,10 +359,35 @@ public class RegistroReceta extends javax.swing.JPanel {
        listarecetas.setLocationRelativeTo(null);
     }//GEN-LAST:event_BtnRecetasCreadasActionPerformed
 
+    private void BtnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGenerarReporteActionPerformed
+        try {
+        // Obtener todas las recetas usando tu controlador de lógica
+        List<Receta> recetas = controlLogica.traerRecetas();
+
+        // Crear instancia del servicio de reporte
+        ReporteRecetasService reporteService = new ReporteRecetasService();
+
+        // Generar PDF en bytes
+        byte[] pdf = reporteService.generarReporteRecetas(recetas, "Robert Sulca");
+
+        // Guardar el PDF en disco (puedes cambiar la ruta o nombre)
+        java.nio.file.Path path = java.nio.file.Paths.get("reporte_recetas.pdf");
+        java.nio.file.Files.write(path, pdf);
+
+        // Mostrar mensaje de éxito
+        JOptionPane.showMessageDialog(this, "Reporte generado correctamente en:\n" + path.toAbsolutePath());
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al generar reporte: " + e.getMessage());
+        e.printStackTrace();
+    }
+    }//GEN-LAST:event_BtnGenerarReporteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAgregarMaterial;
     private javax.swing.JButton BtnEliminarMaterial;
+    private javax.swing.JButton BtnGenerarReporte;
     private javax.swing.JButton BtnGuardarReceta;
     private javax.swing.JButton BtnRecetasCreadas;
     private javax.swing.JTable TblMaterialagregado;

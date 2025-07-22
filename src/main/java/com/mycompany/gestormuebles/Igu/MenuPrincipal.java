@@ -33,7 +33,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         BtnProyectos = new javax.swing.JButton();
-        BtnInicio = new javax.swing.JButton();
         BtnMateriales = new javax.swing.JButton();
         BtnRecetas = new javax.swing.JButton();
         BtnCerrar = new javax.swing.JButton();
@@ -51,14 +50,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         BtnProyectos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnProyectosActionPerformed(evt);
-            }
-        });
-
-        BtnInicio.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        BtnInicio.setText("INICIO");
-        BtnInicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnInicioActionPerformed(evt);
             }
         });
 
@@ -88,7 +79,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         BtnProveedores.setBackground(new java.awt.Color(209, 213, 216));
         BtnProveedores.setFont(new java.awt.Font("Verdana", 0, 18)); // NOI18N
-        BtnProveedores.setForeground(new java.awt.Color(0, 0, 0));
         BtnProveedores.setText("PROVEEDORES");
         BtnProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +91,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(BtnProyectos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(BtnInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BtnMateriales, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
             .addComponent(BtnRecetas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(BtnCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -110,9 +99,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(BtnInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(154, 154, 154)
                 .addComponent(BtnProyectos, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -121,7 +108,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnRecetas, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BtnCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(BtnCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE))
         );
 
         Contenedor.setBackground(new java.awt.Color(255, 255, 255));
@@ -212,23 +199,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Contenedor.repaint();
     }//GEN-LAST:event_BtnRecetasActionPerformed
 
-    private void BtnInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioActionPerformed
-       
-        MaterialesRegistrados inicioMaterial = new MaterialesRegistrados();
-        inicioMaterial.setSize(849, 559);
-        inicioMaterial.setLocation(0, 0);
-        Contenedor.removeAll();
-        Contenedor.add(inicioMaterial);
-        Contenedor.revalidate();
-        Contenedor.repaint();
-        
-    }//GEN-LAST:event_BtnInicioActionPerformed
-
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCerrar;
-    private javax.swing.JButton BtnInicio;
     private javax.swing.JButton BtnMateriales;
     private javax.swing.JButton BtnProveedores;
     private javax.swing.JButton BtnProyectos;

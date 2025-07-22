@@ -81,6 +81,19 @@ public class Receta {
     public void setListaMateriales(List<Receta_Material> listaMateriales) {
         this.listaMateriales = listaMateriales;
     }
+    public String getMaterialesConcatenados() {
+    if (listaMateriales == null || listaMateriales.isEmpty()) {
+        return "No hay materiales";
+    }
+    StringBuilder sb = new StringBuilder();
+    for (Receta_Material rm : listaMateriales) {
+        sb.append(rm.getMaterialReceta().getNombreMaterial())
+          .append(": ")
+          .append(rm.getCantidad())
+          .append("\n");
+    }
+    return sb.toString();
+}
 
     
 }

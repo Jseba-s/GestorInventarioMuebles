@@ -148,6 +148,10 @@ public class Controlador {
     public Receta traerReceta(int idReceta){
         return controlpersis.traerRecetas(idReceta);
     }
+
+    public List<Proyecto> traerProyectos() {
+        return controlpersis.traerProyectos();
+    }
    
 
     

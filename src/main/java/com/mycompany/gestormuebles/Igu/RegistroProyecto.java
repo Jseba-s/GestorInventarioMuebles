@@ -4,17 +4,36 @@
  */
 package com.mycompany.gestormuebles.Igu;
 
+import com.mycompany.gestormuebles.Logica.Controlador;
+import com.mycompany.gestormuebles.Logica.Proyecto;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Jseba
  */
 public class RegistroProyecto extends javax.swing.JPanel {
 
-    /**
-     * Creates new form RegistroProyecto
-     */
+    
+    Controlador controlLogica = new Controlador(); 
     public RegistroProyecto() {
         initComponents();
+        this.addAncestorListener(new javax.swing.event.AncestorListener() {
+            @Override
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                cargarTabla();
+
+            }
+
+            @Override
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+
+            @Override
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
     }
 
     /**
@@ -385,4 +404,39 @@ public class RegistroProyecto extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+void cargarTabla() {
+    // Definir Modelo de la tabla y que las columnas no sean editables
+    DefaultTableModel tabla = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+
+    // Creación de los nombres de la columna
+    String titulos[] = {"ID Proyecto", "Nombre", "Fecha Inicio", "Fecha Terminada", "Estado", "Receta", "Usuario"};
+    tabla.setColumnIdentifiers(titulos);
+
+    // Cargar los datos
+    List<Proyecto> listaProyectos = controlLogica.traerProyectos(); // Este método debe existir en tu lógica
+
+    // Recorrer la lista
+    if (listaProyectos != null) {
+        for (Proyecto proyecto : listaProyectos) {
+            Object[] fila = {
+                proyecto.getIdProyecto(),
+                proyecto.getNombreProyecto(),
+                proyecto.getFechaInicio(),
+                proyecto.getFechaterminada(),
+                proyecto.isEstado() ? "Activo" : "Inactivo",
+                proyecto.getRecetaUsada() != null ? proyecto.getRecetaUsada().getNombreReceta() : "Sin receta",
+                proyecto.getusuario_Proyecto() != null ? proyecto.getusuario_Proyecto().getNombreUsuario() : "Sin usuario"
+            };
+            tabla.addRow(fila);
+        }
+    }
+
+    TblDatosMateriales.setModel(tabla); // Cambia el nombre si ahora la tabla muestra proyectos
+}
+
 }
